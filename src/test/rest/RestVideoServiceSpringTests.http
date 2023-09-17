@@ -1,0 +1,39 @@
+# _krevsky_Spring
+
+###
+# @name getAllVideos
+GET http://localhost:8080/video
+
+###
+# @name addVideo
+POST http://localhost:8080/video
+Content-Type: application/json
+
+{
+  "name": "title_3",
+  "url": "url3",
+  "duration": "300"
+}
+
+###
+# @name addAllVideos
+POST http://localhost:8080/video/addAll
+Content-Type: application/json
+
+[
+  {
+    "name": "title_1",
+    "url": "url1",
+    "duration": "100"
+  },
+  {
+    "name": "title_2",
+    "url": "url2",
+    "duration": "200"
+  }
+]
+
+###
+# @name getVideoByName
+GET http://localhost:8080/video/find?
+    title=title_1
