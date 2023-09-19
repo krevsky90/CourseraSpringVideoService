@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-//@RestController
 @Controller
 public class VideoController implements VideoApi {
     @Autowired
