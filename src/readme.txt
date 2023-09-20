@@ -8,8 +8,19 @@ How to test:
         getVideoByTitle
         getVideoByDurationLessThan
 
+==============
 The idea:
 to remove VideoController and just use @RepositoryRestResource
+
+==============
+My position:
+Pros:
+RepositoryRestResource allows us to use ready REST-structure that is applied to our resource ("video").
+So we don't need to invent the paths for our resource to perform CRUD operation or find smth.
+Cons:
+We cannot our own URIs => for example, I don't know how to addAll videos using RepositoryRestResource
+
+==============
 
 NOTE:
     I had to remove addAllVideos POST reuest and rewrite getVideoBy... REST queries since we use @RepositoryRestResource =>
