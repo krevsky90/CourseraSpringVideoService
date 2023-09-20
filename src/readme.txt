@@ -6,7 +6,7 @@ How to test:
         addVideo
         addAllVideos
         getAllVideos
-        getVideoByName
+        findByTitle
 
 The idea:
 to remove VideoRepository's implementation (.class file) and just use @Repository
