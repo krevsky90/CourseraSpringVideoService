@@ -4,12 +4,22 @@ How to test:
     use src/test/rest/RestVideoServiceSpringTests.http
     execute
         addVideo
-        addAllVideos
         getAllVideos
-        getVideoByName
+        getVideoByTitle
+        getVideoByDurationLessThan
 
 The idea:
 to remove VideoController and just use @RepositoryRestResource
+
+NOTE:
+    I had to remove addAllVideos POST reuest and rewrite getVideoBy... REST queries since we use @RepositoryRestResource =>
+    " 1. List all videos by sending a GET request to /video
+      2. Add a video by sending a POST request to /video with the JSON for a video
+      3. Get a specific video by sending a GET request to /video/{videoId}
+         (e.g., /video/1 would return the JSON for the video with id=1)
+      4. Send search requests to our findByXYZ methods to /video/search/findByXYZ
+         (e.g., /video/search/findByName?title=Foo)"
+
 
 ============= Additional knowledge =============
 To test this we use h2 DB that stores data to project directory (i.e. not in-memory option):

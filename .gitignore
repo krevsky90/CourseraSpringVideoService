@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/h2_test_db.lock.db
+/h2_test_db.mv.db
+/h2_test_db.trace.db

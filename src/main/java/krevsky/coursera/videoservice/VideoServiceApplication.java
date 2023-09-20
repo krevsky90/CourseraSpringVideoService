@@ -4,7 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 // Tell Spring that this object represents a Configuration for the application
@@ -20,14 +22,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 // find any Controllers or other components that are part of our application.
 // Any class in this package that is annotated with @Controller is going to be
 // automatically discovered and connected to the DispatcherServlet.
-//@ComponentScan
-@ComponentScan("krevsky.coursera.videoservice.controllers")
+@ComponentScan("krevsky.coursera.videoservice.repositories")
 //helps to search Repository Interface and create its implementation automatically
 //also it let's not to create method with @Bean annotation that returns the implementation of the Repository
 @EnableJpaRepositories
 //or @EnableJpaRepositories(basePackageClasses = VideoRepository.class)  //It lets us not to create @Bean method in Application class to return particular implementation
+@Import({RepositoryRestMvcConfiguration.class})
 public class VideoServiceApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(VideoServiceApplication.class, args);
     }

@@ -40,4 +40,20 @@ Troubleshooting:
 
     NOTE: after that I went to 'Database' tab and recreated Datasource using option 'DataSource from URL'.
         Now I can change DB via REST requests and look at VIDEO table in DB directly by select-queries
+===================
+4) PROBLEM:
+    after start the application the error is:
+        org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'handlerExceptionResolver' defined in org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration: Failed to instantiate [org.springframework.web.servlet.HandlerExceptionResolver]: Factory method 'handlerExceptionResolver' threw exception with message: Error creating bean with name 'selfLinkProvider' defined in krevsky.coursera.videoservice.VideoServiceApplication: Unsatisfied dependency expressed through method 'selfLinkProvider' parameter 1: Error creating bean with name 'entityLinks' defined in krevsky.coursera.videoservice.VideoServiceApplication: Unsatisfied dependency expressed through method 'entityLinks' parameter 2: Error creating bean with name 'resourceMappings' defined in krevsky.coursera.videoservice.VideoServiceApplication: Failed to instantiate [org.springframework.data.rest.core.mapping.RepositoryResourceMappings]: Factory method 'resourceMappings' threw exception with message: Path /video configured for krevsky.coursera.videoservice.repositories.VideoRepository must only contain a single path segment
+   SOLUTION:
+    https://stackoverflow.com/questions/58830824/repositoryrestresource-did-not-work-spring-boot-2-2-1-release-while-running-oc
+    to remove "/" from the beginning of the path. i.e. go to VideoRepository interface and replace
+        @RepositoryRestResource(..., path = "/video")
+    with
+        @RepositoryRestResource(..., path = "video")
 
+5) PROBLEM:
+    after start the application the error is:
+        org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'restHandlerMapping' defined in krevsky.coursera.videoservice.VideoServiceApplication: Failed to instantiate [org.springframework.data.rest.webmvc.config.DelegatingHandlerMapping]: Factory method 'restHandlerMapping' threw exception with message: failed to access class org.springframework.data.rest.webmvc.config.DelegatingHandlerMapping from class krevsky.coursera.videoservice.VideoServiceApplication$$SpringCGLIB$$0 (org.springframework.data.rest.webmvc.config.DelegatingHandlerMapping and krevsky.coursera.videoservice.VideoServiceApplication$$SpringCGLIB$$0 are in unnamed module of loader 'app')
+   SOLUTION:
+    https://github.com/spring-projects/spring-data-rest/issues/1981
+    i.e. it's better to add @Import({RepositoryRestMvcConfiguration.class}) instead of extension of RepositoryRestMvcConfiguration
