@@ -22,3 +22,22 @@ Troubleshooting:
     Add @ResponseBody annotation to ALL methods of VideoControlle class
     OR use @RestController annotation. Since @RestController = @Controller + @ResponseBody
         => @ResponseBody will be applied to all methods of this class
+
+2) PROBLEM:
+    jpa entity is not a managed type
+
+   SOLUTION: https://stackoverflow.com/questions/28664064/spring-boot-not-a-managed-type
+    In the recent version of Springboot and JDK, this error is a result of the "Javax" namespace used in Java EE being replaced with the "Jakarta" namespace in Jakarta EE.
+
+3) PROBLEM:
+    if I start SpringBoot application, then I can't open VIDEO table via 'Database' tab or perform any queries to it using h2 console.
+    The error is:
+    [2023-09-19 18:23:20] [90020][90020] Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-210]
+    [2023-09-19 18:23:20] The file is locked: C:/Grisha/JavaProjects/Coursera/cloud-services-java-spring-framework/krevsky/VideoService_week4/h2_test_db.mv.db [2.1.210/7]
+   SOLUTION:
+    https://stackoverflow.com/questions/9318116/how-to-run-h2-database-in-server-mode
+    I took the idea "to add AUTO_SERVER=TRUE to url of DB properties in application.properties"
+
+    NOTE: after that I went to 'Database' tab and recreated Datasource using option 'DataSource from URL'.
+        Now I can change DB via REST requests and look at VIDEO table in DB directly by select-queries
+

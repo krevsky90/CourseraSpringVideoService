@@ -1,8 +1,17 @@
 package krevsky.coursera.videoservice.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
+@Entity
 public class Video {
+    @Id                                             // mark the field as primary key
+    @GeneratedValue(strategy = GenerationType.AUTO) // optional thing that provides unique generated ID
+    private Long id;
     private String name;
     private String url;
     private int duration;
@@ -38,6 +47,10 @@ public class Video {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

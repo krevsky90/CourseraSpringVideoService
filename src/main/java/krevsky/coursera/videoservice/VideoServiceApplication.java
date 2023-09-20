@@ -1,12 +1,10 @@
 package krevsky.coursera.videoservice;
 
-import krevsky.coursera.videoservice.repositories.VideoRepository;
-import krevsky.coursera.videoservice.repositories.VideoRepositoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 // Tell Spring that this object represents a Configuration for the application
@@ -24,18 +22,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 // automatically discovered and connected to the DispatcherServlet.
 //@ComponentScan
 @ComponentScan("krevsky.coursera.videoservice.controllers")
+//helps to search Repository Interface and create its implementation automatically
+//also it let's not to create method with @Bean annotation that returns the implementation of the Repository
+@EnableJpaRepositories
+//or @EnableJpaRepositories(basePackageClasses = VideoRepository.class)  //It lets us not to create @Bean method in Application class to return particular implementation
 public class VideoServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(VideoServiceApplication.class, args);
-    }
-
-    // We need to tell Spring which implementation of the VideoRepository
-    // that it should use. Spring is going to automatically inject whatever
-    // we return into the VideoController's videos member variable that is annotated
-    // with @Autowired.
-    @Bean
-    public VideoRepository getVideoRepository() {
-        return new VideoRepositoryImpl();
     }
 }
