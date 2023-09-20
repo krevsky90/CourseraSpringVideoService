@@ -9,7 +9,7 @@ How to test:
         getVideoByName
 
 The idea:
-to remove VideoRepository's implementation (.class file) and just use @Repository
+to remove VideoController and just use @RepositoryRestResource
 
 ============= Additional knowledge =============
 To test this we use h2 DB that stores data to project directory (i.e. not in-memory option):
